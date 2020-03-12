@@ -36,6 +36,16 @@ void loop() {
   microRead_frontR = analogRead(microR_F);
   microRead_sideL = analogRead(microL_S);
   microRead_sideR = analogRead(microR_S);
+  Serial.print("Front Left:");
+  Serial.print(microRead_frontL);
+  Serial.print("   ");
+  Serial.print("Front Right:");
+  Serial.println(microRead_frontR);
+  Serial.print("Side Left:");
+  Serial.print(microRead_sideL);
+  Serial.print("   ");
+  Serial.print("Side Right:");
+  Serial.println(microRead_sideR);
   if (Serial.available()){
     char state = Serial.read();
     if (state == 'S'){
@@ -46,7 +56,8 @@ void loop() {
       }else if(microRead_frontL != 0){
         turnDCleft();
         if (microRead_sideL != 0 && microRead_sideR != 0){
-          
+          turnDCstop();
+          Serial.println("Success");
         }
       }
     }
